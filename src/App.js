@@ -1,13 +1,13 @@
 import React from "react";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
-import Main from "./main";
+import Root from "./components/Root";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route component={Main} />
+        <Route component={Root} />
       </Switch>
     </Router>
   );
