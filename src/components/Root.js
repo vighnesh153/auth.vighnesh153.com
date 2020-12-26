@@ -17,7 +17,6 @@ function Root(props) {
   }
 
   useEffect(() => {
-    const history = useHistory();
     const authUtil = new AuthUtil(props.location.search);
 
     if (authUtil.shouldInitiateAuth() === false) {
@@ -39,7 +38,7 @@ function Root(props) {
       .finally(() => {
         setIsCheckingAuth(false);
       })
-  }, []);
+  }, [history]);
 
   if (authUtil.hasLoginSucceeded) {
     const redirectUrl = localStorage.getItem('redirectUrl')
