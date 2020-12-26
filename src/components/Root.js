@@ -38,7 +38,7 @@ function Root(props) {
       .finally(() => {
         setIsCheckingAuth(false);
       })
-  }, [history]);
+  }, [history, props.location.search]);
 
   if (authUtil.hasLoginSucceeded) {
     const redirectUrl = localStorage.getItem('redirectUrl')
