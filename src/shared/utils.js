@@ -1,3 +1,5 @@
+import constants from "./constants";
+
 export class AuthUtil {
   constructor(searchParams) {
     this.params = new URLSearchParams(searchParams);
@@ -19,3 +21,11 @@ export class AuthUtil {
       !this.accessDenied;
   }
 }
+
+export const isValidRedirectURL = (url) => {
+  return (
+    url &&
+    url !== "null" &&
+    constants.redirectUrlRegex.test(url)
+  );
+};

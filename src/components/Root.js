@@ -3,7 +3,7 @@ import {Alert, Button, Container} from "react-bootstrap";
 import {useHistory} from 'react-router-dom';
 
 import constants from '../shared/constants';
-import {AuthUtil} from '../shared/utils';
+import {AuthUtil, isValidRedirectURL} from '../shared/utils';
 
 function Root(props) {
   const history = useHistory();
@@ -27,14 +27,12 @@ function Root(props) {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if (res.message === "SUCCESS") {
           return history.push("/?loginSuccess")
         }
+        console.log(res);
       })
-      .catch(err => {
-        console.log(err);
-      })
+      .catch(console.log)
       .finally(() => {
         setIsCheckingAuth(false);
       })
@@ -42,9 +40,9 @@ function Root(props) {
 
   if (authUtil.hasLoginSucceeded) {
     const redirectUrl = localStorage.getItem('redirectUrl')
-    if (redirectUrl && redirectUrl !== "null") {
+    if (isValidRedirectURL(redirectUrl)) {
       localStorage.removeItem('redirectUrl');
-      history.push(atob(redirectUrl));
+      window.location.href = decodeURIComponent(redirectUrl);
       return null;
     }
   }
@@ -67,12 +65,17 @@ function Root(props) {
     <Alert variant={"danger"}>You denied access. Github public data access is needed.</Alert>
   );
 
-  return (
-    <Container style={{marginTop: 20, textAlign: 'center'}}>
+  const body = (
+    <React.Fragment>
       {alertLoginSuccess}
       {alertLoginFailed}
       {accessDeniedAlert}
-      <h3>Welcome to Auth portal for https://*.vighnesh153.com</h3>
+      <h3>
+        Auth portal for &nbsp;
+        <a href="https://apps.vighnesh153.com" target="_blank">
+          *.vighnesh153.com
+        </a>
+      </h3>
       {
         authUtil.hasLoginSucceeded === false && (
           <Button
@@ -85,6 +88,12 @@ function Root(props) {
           </Button>
         )
       }
+    </React.Fragment>
+  );
+
+  return (
+    <Container style={{marginTop: 20, textAlign: 'center', maxWidth: 700}}>
+      {body}
     </Container>
   );
 }
