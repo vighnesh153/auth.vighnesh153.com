@@ -17,6 +17,9 @@ function Root(props) {
   }
 
   useEffect(() => {
+    const history = useHistory();
+    const authUtil = new AuthUtil(props.location.search);
+
     if (authUtil.shouldInitiateAuth() === false) {
       return;
     }
@@ -72,7 +75,7 @@ function Root(props) {
       {accessDeniedAlert}
       <h3>
         Auth portal for &nbsp;
-        <a href="https://apps.vighnesh153.com" target="_blank">
+        <a href="https://apps.vighnesh153.com" target="_blank" rel="noreferrer">
           *.vighnesh153.com
         </a>
       </h3>
