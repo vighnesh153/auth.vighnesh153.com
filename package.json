@@ -1,0 +1,30 @@
+{
+  "name": "auth.vighnesh153.com",
+  "version": "0.1.0",
+  "private": true,
+  "prettier": "@vighnesh153/prettier-config",
+  "lint:prettier:all": "prettier --ignore-path ./node_modules/@vighnesh153/prettier-config/.prettierignore",
+  "lint:prettier:staged": "pretty-quick --staged --ignore-path ./node_modules/@vighnesh153/prettier-config/.prettierignore",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "12.2.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.6.1",
+    "@types/react": "18.0.15",
+    "@types/react-dom": "18.0.6",
+    "@vighnesh153/prettier-config": "^1.0.3",
+    "eslint": "8.20.0",
+    "eslint-config-next": "12.2.3",
+    "prettier": "^2.7.1",
+    "pretty-quick": "^3.1.3",
+    "typescript": "4.7.4"
+  }
+}
